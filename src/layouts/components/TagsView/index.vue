@@ -185,22 +185,22 @@ onMounted(() => {
         @click.middle="!isAffix(tag) && closeSelectedTag(tag)"
         @contextmenu.prevent="openMenu(tag, $event)"
       >
-        <el-button
-          type="default"
-          :class="{ active: isActive(tag) }"
+        <el-tag
+          :type="isActive(tag) ? '' : 'info'"
+          closable
+          :effect="isActive(tag) ? 'light' : 'plain'"
         >
           <span
             class="mr-1"
-            :class="{ active: isActive(tag) }"
           >{{ tag.meta?.title }}</span>
-          <el-icon
+          <!-- <el-icon
             v-if="!isAffix(tag)"
             :size="12"
             @click.prevent.stop="closeSelectedTag(tag)"
           >
             <Close />
-          </el-icon>
-        </el-button>
+          </el-icon> -->
+        </el-tag>
       </RouterLink>
     </ScrollPane>
     <ul

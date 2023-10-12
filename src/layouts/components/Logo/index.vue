@@ -22,37 +22,41 @@ const { layoutMode } = storeToRefs(settingsStore)
     class="layout-logo-container"
     :class="{ 'collapse': props.collapse, 'layout-mode-top': layoutMode === 'top' }"
   >
-    <transition name="layout-logo-fade">
-      <router-link
-        v-if="props.collapse"
-        key="collapse"
-        to="/"
+    <!-- <transition name="layout-logo-fade"> -->
+    <router-link
+      v-if="props.collapse"
+      key="collapse"
+      to="/"
+    >
+      <img
+        :src="logo"
+        class="layout-logo"
       >
-        <img
-          :src="logo"
-          class="layout-logo"
-        >
-      </router-link>
-      <router-link
-        v-else
-        key="expand"
-        to="/"
-      >
-        <img
+    </router-link>
+    <router-link
+      v-else
+      key="expand"
+      to="/"
+    >
+      <span class="text-primary font-bold text-16px">{{ $appConfig.name }}</span>
+
+      <!-- {{ $appConfig.name }} -->
+      <!-- <img
           :src="layoutMode !== 'left' ? logoText2 : logoText1"
           class="layout-logo-text"
-        >
-      </router-link>
-    </transition>
+        > -->
+    </router-link>
+    <!-- </transition> -->
   </div>
 </template>
 
 <style lang="scss" scoped>
 .layout-logo-container {
   position: relative;
+  padding: 24px 0;
   // width: 100%;
-  height: var(--v3-header-height);
-  line-height: var(--v3-header-height);
+  // height: var(--v3-header-height);
+  // line-height: var(--v3-header-height);
   background-color: transparent;
   text-align: center;
   overflow: hidden;

@@ -64,9 +64,25 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         path: 'index',
         component: () => import('@/views/users/index.vue'),
-        name: 'users',
+        name: 'Users',
         meta: {
-          title: 'users',
+          title: '用户列表',
+          elIcon: 'User',
+        },
+      },
+    ],
+  },
+  {
+    path: '/roles',
+    component: Layouts,
+    redirect: '/roles/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/roles/index.vue'),
+        name: 'Roles',
+        meta: {
+          title: '角色列表',
           elIcon: 'User',
         },
       },

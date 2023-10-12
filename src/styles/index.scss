@@ -51,3 +51,11 @@ a:hover {
 div:focus {
   outline: none;
 }
+
+.v3-bg{
+  background-color: var(--el-bg-color, #fff);
+ }
+
+ .text-primary{
+  color: var(--el-color-primary, #000)
+ }

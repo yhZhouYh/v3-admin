@@ -1,38 +1,52 @@
 <script lang="tsx" setup>
 import { ElInput } from 'element-plus'
 import Table from '@/components/SearchTable/index.vue'
-import { getIamUsers } from '@/api/users'
+import { getIamUsers, getIamUsersId, postIamUsers } from '@/api/users'
 
 const columns = [
+  {
+    prop: 'password',
+    label: '密码',
+    isShowInTable: false,
+    filterOptions: {
+      isShowInSearch: false,
+      type: 'input',
+      rules: [{
+        required: true,
+        message: '请输入年龄',
+        trigger: 'blur',
+      }],
+    },
+  },
   {
     prop: 'age',
     label: '年龄',
     width: '180',
     filterOptions: {
-      type: 'select',
-      enums: [
-        {
-          label: '我爱你',
-          value: 1,
-        },
-        {
-          label: '你爱我',
-          value: 2,
-        },
-      ],
+      type: 'input',
+      rules: [{
+        required: true,
+        message: '请输入年龄',
+        trigger: 'blur',
+      }],
     },
   },
   {
     prop: 'email',
     label: '邮箱',
     width: '200',
-    filterOptions: (sp: any) => <ElInput v-model={sp.value.name} placeholder='请输入Name'></ElInput>,
+    filterOptions: {
+      renderFn: (sp: any) => <ElInput v-model={sp.email} placeholder='请输入Name'></ElInput>,
+    },
 
   },
   {
     prop: 'mobile',
     label: '手机号',
     width: '200',
+    filterOptions: {
+      type: 'input',
+    },
   },
   {
     prop: 'username',
@@ -51,12 +65,26 @@ function requestGetIamUsers(params) {
     ...params,
   }, true)
 }
+
+function requestGetIamUsersId(params) {
+  return getIamUsersId({
+    id: params,
+  }, true)
+}
+
+function requestPostIamUser(params) {
+  return postIamUsers({
+    ...params,
+  }, true)
+}
 </script>
 
 <template>
   <Table
     :columns="columns"
-    :request="requestGetIamUsers"
+    :list-request="requestGetIamUsers"
+    :detail-request="requestGetIamUsersId"
+    :new-request="requestPostIamUser"
   />
 </template>
 

@@ -1,5 +1,7 @@
-// core
 import { createApp } from 'vue'
+import { loadConfig } from '@/config'
+
+// core
 import App from '@/App.vue'
 import store from '@/store'
 import router from '@/router'
@@ -27,6 +29,8 @@ loadPlugins(app)
 loadSvg(app)
 /** 加载自定义指令 */
 loadDirectives(app)
+/** 全局配置 */
+loadConfig(app)
 
 app.use(store).use(router)
 router.isReady().then(() => {
