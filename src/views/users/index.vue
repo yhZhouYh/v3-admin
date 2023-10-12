@@ -1,7 +1,12 @@
 <script lang="tsx" setup>
 import { ElInput } from 'element-plus'
 import Table from '@/components/SearchTable/index.vue'
-import { getIamUsers, getIamUsersId, postIamUsers } from '@/api/users'
+import { deleteIamUsersId, getIamUsers, getIamUsersId, postIamUsers } from '@/api/users'
+import { Switch } from '@/components/SearchTable/components/autoDefine'
+
+defineOptions({
+  name: 'Users',
+})
 
 const columns = [
   {
@@ -10,7 +15,7 @@ const columns = [
     isShowInTable: false,
     filterOptions: {
       isShowInSearch: false,
-      type: 'input',
+      labelName: 'input',
       rules: [{
         required: true,
         message: '请输入年龄',
@@ -23,7 +28,8 @@ const columns = [
     label: '年龄',
     width: '180',
     filterOptions: {
-      type: 'input',
+      // isShowInSearch: false,
+      labelName: 'datePicker',
       rules: [{
         required: true,
         message: '请输入年龄',
@@ -45,7 +51,26 @@ const columns = [
     label: '手机号',
     width: '200',
     filterOptions: {
-      type: 'input',
+      labelName: 'input',
+    },
+  },
+  {
+    prop: 'disable',
+    label: '状态',
+    width: '200',
+    renderCell: scope => <Switch v-model={scope.row.disable} />,
+    filterOptions: {
+      labelName: 'select',
+      enums: [
+        {
+          label: '启用',
+          value: 0,
+        },
+        {
+          label: '禁用',
+          value: 1,
+        },
+      ],
     },
   },
   {
@@ -77,6 +102,11 @@ function requestPostIamUser(params) {
     ...params,
   }, true)
 }
+function requestDeleteIamUsersId(params) {
+  return deleteIamUsersId({
+    ...params,
+  }, true)
+}
 </script>
 
 <template>
@@ -85,6 +115,7 @@ function requestPostIamUser(params) {
     :list-request="requestGetIamUsers"
     :detail-request="requestGetIamUsersId"
     :new-request="requestPostIamUser"
+    :delete-request="requestDeleteIamUsersId"
   />
 </template>
 

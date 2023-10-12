@@ -43,7 +43,7 @@ const key = computed(() => {
 .app-scrollbar {
   height: 100%;
   border-radius: 4px;
-  border: 1px solid var(--el-border-color-light, #fff);
+  // border: 1px solid var(--el-border-color-light, #fff);
   // background-color: var(--el-fill-color-blank, #fff);
 }
 </style>

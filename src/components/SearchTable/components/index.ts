@@ -1,5 +1,7 @@
 import * as comps from './autoDefine'
 
+console.log(comps, 'xxx')
+
 export function RenderFilter(props: any) {
   return props?.fn(props.data)
 }
@@ -10,8 +12,10 @@ export const GetComp = {
       type: String,
     },
   },
-  setup(props, { attrs }) {
-    return () => h(comps[props?.name], { ...attrs }, [])
+  setup(props, { attrs, slots }) {
+    const componentName = Object.keys(comps).find((item) => {
+      return item.toLowerCase() === props.name.toLowerCase()
+    })
+    return componentName ? () => h(comps[componentName], { ...attrs }, slots) : null
   },
-
 }

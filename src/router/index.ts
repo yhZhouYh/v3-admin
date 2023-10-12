@@ -66,6 +66,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/users/index.vue'),
         name: 'Users',
         meta: {
+          keepAlive: true,
           title: '用户列表',
           elIcon: 'User',
         },
@@ -83,7 +84,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: 'Roles',
         meta: {
           title: '角色列表',
-          elIcon: 'User',
+          elIcon: 'UserFilled',
         },
       },
     ],

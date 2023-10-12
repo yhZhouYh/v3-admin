@@ -8,13 +8,13 @@ interface SelectOptions {
 }
 
 export interface FilterOptions {
-  type: 'input' | 'date' | 'select'
-  newType: 'input' | 'date' | 'select' // 新建时可能得不一样type
+  labelName: 'input' | 'date' | 'select'
+  newLabelName?: 'input' | 'date' | 'select' // 新建时可能得不一样type
   enums?: SelectOptions[]
   rules?: FormRules
   renderFn?: ((p: any) => RenderFunction)
-  isShowInSearch: boolean
-  isShowInEdit: boolean
+  isShowInSearch?: boolean
+  isShowInEdit?: boolean
 }
 
 export interface Columns extends TableColumnCtx<any> {

@@ -1,5 +1,5 @@
 <script lang="tsx" setup>
-import { ElFormItem, ElTable, ElTableColumn } from 'element-plus'
+import { ElFormItem, ElMessage, ElMessageBox, ElTable, ElTableColumn } from 'element-plus'
 import type { FunctionalComponent } from 'vue'
 import type { ModalMode, MyTableProps } from './types'
 import { GetComp, RenderFilter } from './components'
@@ -84,13 +84,33 @@ function handleNew() {
   emits('onNew')
 }
 
-function handleDelete(index, row) {
+async function handleDelete(index, row) {
+  await ElMessageBox.confirm('确认要删除此项么？', '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+  if (!props.deleteRequest) return
+  try {
+    await props.deleteRequest({
+      id: row.id,
+    })
+    ElMessage({
+      type: 'success',
+      message: '删除成功',
+    })
+    submitFilterForm()
+  }
+  catch (error) {
+    console.error(error)
+  }
+
   emits('onDelete', index, row)
 }
 </script>
 
 <template>
-  <div class="flex flex-col h-full">
+  <div class="search-table flex flex-col h-full">
     <ElForm
       v-if="isShowFilter"
       :model="searchParams"
@@ -123,9 +143,10 @@ function handleDelete(index, row) {
             >
               <GetComp
                 v-model="searchParams[item.prop as string]"
-                :name="item?.filterOptions?.type"
+                :name="item.filterOptions?.labelName"
                 :placeholder="`请输入${item.label}`"
-                :options="item?.filterOptions?.enums"
+                :options="item.filterOptions?.enums"
+                v-bind="item.filterOptions"
               />
             </ElFormItem>
           </template>
@@ -214,5 +235,10 @@ function handleDelete(index, row) {
 .el-select{
   width: 100%;
 
+}
+::v-deep.search-table {
+  .el-date-editor{
+    width: 100%;
+  }
 }
 </style>

@@ -127,9 +127,10 @@ function submitForm(formEl) {
           <GetComp
             v-else
             v-model="editParams[item.prop as string]"
-            :name="mode === 'new' ? item?.filterOptions?.newType || item?.filterOptions?.type : item?.filterOptions?.type "
+            :name="mode === 'new' ? item?.filterOptions?.newLabelName || item?.filterOptions?.labelName : item?.filterOptions?.labelName "
             :placeholder="`请输入${item.label}`"
             :options="item?.filterOptions?.enums"
+            v-bind="item.filterOptions"
           />
         </DetailOrEdit>
       </ElFormItem>

@@ -1,16 +1,17 @@
-<script lang="tsx" setup>
-import { ElInput } from 'element-plus'
+<script  setup>
 import Table from '@/components/SearchTable/index.vue'
-import { getIamRoles, getIamRolesId, getIamRolesNames } from '@/api/roles'
+import { deleteIamRolesId, getIamRoles, getIamRolesId, getIamRolesNames } from '@/api/roles'
 
 const columns = ref([
   {
     prop: 'name',
     label: '角色名称',
     filterOptions: {
-      type: 'select',
-      newType: 'input',
+      labelName: 'select',
+      newLabelName: 'input',
       enums: [],
+      maxlength: 10,
+      showWordLimit: true,
       rules: [{
         required: true,
         message: '请输入角色名称',
@@ -22,7 +23,7 @@ const columns = ref([
     prop: 'description',
     label: '角色描述',
     filterOptions: {
-      type: 'input',
+      labelName: 'input',
     },
   },
 
@@ -52,7 +53,12 @@ async function requestGetIamRoelsNames() {
   })
   const columnItem = columns.value.find(item => item.prop === 'name')
   columnItem && (columnItem.filterOptions.enums = data)
-  console.log(columnItem, columns)
+}
+
+function requestDeleteIamRolesId(params) {
+  return deleteIamRolesId({
+    ...params,
+  }, true)
 }
 </script>
 
@@ -61,6 +67,7 @@ async function requestGetIamRoelsNames() {
     :columns="columns"
     :list-request="requestGetIamRoles"
     :detail-request="requestGetIamRolesId"
+    :delete-request="requestDeleteIamRolesId"
   />
 </template>
 
