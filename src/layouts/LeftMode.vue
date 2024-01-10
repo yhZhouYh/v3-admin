@@ -98,6 +98,7 @@ $transition-time: 0.35s;
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .fixed-header {
@@ -115,21 +116,21 @@ $transition-time: 0.35s;
 
 .app-main {
   // min-height: calc(100vh - var(--v3-navigationbar-height));
-  flex: 1;
+  // flex: 1;
   position: relative;
-  overflow: auto;
+  // overflow: auto;
 }
 
 .fixed-header + .app-main {
   padding-top: var(--v3-navigationbar-height);
   height: 100vh;
-  overflow: auto;
+  // overflow: auto;
 }
 
 .hasTagsView {
   .app-main {
-    flex: 1;
-    overflow: auto;
+    // flex: 1;
+    // overflow: auto;
     // min-height: calc(100vh - var(--v3-header-height));
   }
   .fixed-header + .app-main {

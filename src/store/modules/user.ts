@@ -28,10 +28,10 @@ export const useUserStore = defineStore('user', () => {
   }
   /** 登录 */
   const login = async ({ account, password }: PostIamAuthTokenRequest) => {
-    const { accessToken } = await postIamAuthToken({ account, password })
-    if (!accessToken) return
-    setToken(accessToken)
-    token.value = accessToken
+    // const { accessToken } = await postIamAuthToken({ account, password })
+    // if (!accessToken) return
+    setToken('1234')
+    token.value = '1234'
     // token.value = data.token
   }
   /** 获取用户详情 */

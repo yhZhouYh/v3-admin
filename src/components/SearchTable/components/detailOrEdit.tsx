@@ -10,6 +10,6 @@ const props: IProps = {
 
 DetailOrEdit.props = props
 
-export function DetailOrEdit(props, { slots }) {
+export function DetailOrEdit(props: IProps, { slots }) {
   return props.mode === 'edit' || props.mode === 'new' ? <>{slots?.default?.()}</> : <>{slots.detail?.(props.value) || (props.value ?? '-')}</>
 }

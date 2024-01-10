@@ -96,8 +96,8 @@ $transition-time: 0.35s;
 .app-main {
   transition: padding-left $transition-time;
   padding-left: var(--v3-sidebar-width);
-  overflow: auto;
-  flex: 1;
+  // overflow: auto;
+  // flex: 1;
 }
 
 .hideSidebar {

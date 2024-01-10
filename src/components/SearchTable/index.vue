@@ -185,7 +185,6 @@ async function handleDelete(index, row) {
       <Table
         v-if="isShowTable"
         v-bind="$attrs"
-        height="100%"
       >
         <template #action="scope">
           <slot

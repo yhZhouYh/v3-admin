@@ -74,7 +74,7 @@ $transition-time: 0.35s;
 
 .app-main {
   transition: padding-left $transition-time;
-  overflow: auto;
+  // overflow: auto;
   height: 100%;
 }
 

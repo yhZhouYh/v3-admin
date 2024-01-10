@@ -42,6 +42,7 @@ function handleLogin() {
         })
         .catch(() => {
           // createCode()
+          router.push({ path: '/' })
           loginFormData.password = ''
         })
         .finally(() => {
